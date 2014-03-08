@@ -144,9 +144,10 @@ class Parser {
 		
 		if(empty($this->params[$param])) {
 			$this->params[$param] = $value;
-		} else {
-			$arr = array($this->params[$param], $value);
-			$this->params[$param] = $arr;
+		}elseif(is_array($this->params[$param])){
+		        $this->params[$param] = array_merge($this->params[$param], array($value));
+		}elseif(is_string($this->params[$param])){
+		        $this->params[$param] = array($this->params[$param],$value);
 		}
 		return true;
 	}
